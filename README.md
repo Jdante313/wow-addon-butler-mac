@@ -2,7 +2,7 @@
 
 ![tests](https://github.com/Jdante313/wow-addon-butler-mac/actions/workflows/tests.yml/badge.svg)
 
-macOS 版的《魔兽世界》插件管理器。启动即进入已安装插件列表，支持多客户端切换、默认插件列表 + 分类/排序、精确/相似搜索结果分区、在线与本地 ZIP 安装，以及把插件和 WTF 角色配置保存成可迁移的 `.wowpack` 快照。
+macOS 版的《魔兽世界》插件管理器。启动即进入已安装插件列表，支持自动查找游戏路径、本地插件升级/卸载、CurseForge 等来源搜索、本地 ZIP 安装，以及插件备份与恢复。完全本地运行。
 
 ![搜索页](docs/curseforge-results.png)
 
