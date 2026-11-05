@@ -1,6 +1,16 @@
 # 魔兽插件管家 · macOS
 
+![tests](https://github.com/Jdante313/wow-addon-butler-mac/actions/workflows/tests.yml/badge.svg)
+
 macOS 版的《魔兽世界》插件管理器。启动即进入已安装插件列表，支持多客户端切换、默认插件列表 + 分类/排序、精确/相似搜索结果分区、在线与本地 ZIP 安装，以及把插件和 WTF 角色配置保存成可迁移的 `.wowpack` 快照。
+
+![搜索页](docs/curseforge-results.png)
+
+## 下载
+
+- [最新 Release](https://github.com/Jdante313/wow-addon-butler-mac/releases/latest)
+- 当前版本：`2.1.8`，macOS 13.5+ / Apple Silicon
+- 解压后把 `魔兽插件管家.app` 拖进「应用程序」即可
 
 - 用户文档：[使用说明.md](使用说明.md)
 - 产品说明（能做什么 / 不能做什么 / 适合谁）：[产品说明.md](产品说明.md)
