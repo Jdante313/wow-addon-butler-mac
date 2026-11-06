@@ -9,13 +9,13 @@ macOS 版的《魔兽世界》插件管理器。启动即进入已安装插件�
 ## 下载
 
 - [最新 Release](https://github.com/Jdante313/wow-addon-butler-mac/releases/latest)
-- 当前版本：`2.1.8`，macOS 13.5+ / Apple Silicon
+- 当前版本：`2.1.9`，macOS 13.5+ / Apple Silicon
 - 解压后把 `魔兽插件管家.app` 拖进「应用程序」即可
 
 - 用户文档：[使用说明.md](使用说明.md)
 - 产品说明（能做什么 / 不能做什么 / 适合谁）：[产品说明.md](产品说明.md)
 - 应用产物：`dist/魔兽插件管家.app`
-- 分发压缩包：`dist/魔兽插件管家-2.1.8-macOS-arm64.zip`
+- 分发压缩包：`dist/魔兽插件管家-2.1.9-macOS-arm64.zip`
 - 需要 macOS 13.5+ / Apple Silicon
 
 ## 开发
@@ -24,7 +24,7 @@ macOS 版的《魔兽世界》插件管理器。启动即进入已安装插件�
 cd app
 npm install      # 依赖只有 adm-zip
 npm start        # http://127.0.0.1:17321
-npm test         # 17 个后端测试
+npm test         # 18 个后端测试
 ```
 
 前端是原生 ES Modules + CSS，没有构建步骤。后端只依赖 `adm-zip`，数据保存在 `~/Library/Application Support/WowAddonButler`（可用 `WOW_BUTLER_DATA` 覆盖，测试时会自动隔离）。

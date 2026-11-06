@@ -6,7 +6,7 @@ DIST="$ROOT/dist"
 APP_NAME="魔兽插件管家"
 APP="$DIST/$APP_NAME.app"
 BUILD="$ROOT/build"
-VERSION="2.1.8"
+VERSION="2.1.9"
 
 NODE_BIN="${NODE_BIN:-$(command -v node || true)}"
 NPM_BIN="${NPM_BIN:-$(command -v npm || true)}"
