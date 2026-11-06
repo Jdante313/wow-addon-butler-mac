@@ -168,7 +168,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     @objc private func showAbout() {
         NSApp.orderFrontStandardAboutPanel(options: [
             .applicationName: appName,
-            .applicationVersion: "2.1.9",
+            .applicationVersion: "2.1.10",
             .version: "macOS",
             .credits: NSAttributedString(
                 string: "本地运行的魔兽世界插件管理器\n数据保存在 \(dataDir.path)",
