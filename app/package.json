@@ -1,6 +1,6 @@
 {
   "name": "wow-addon-butler-mac",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "private": true,
   "description": "魔兽插件管家 - macOS 插件搜索、安装、更新与配置迁移",
   "main": "server/index.js",

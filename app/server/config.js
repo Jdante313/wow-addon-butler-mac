@@ -6,7 +6,7 @@ const os = require('node:os');
 
 const APP_ROOT = path.resolve(__dirname, '..');
 const APP_NAME = '魔兽插件管家';
-const APP_VERSION = '2.1.10';
+const APP_VERSION = '2.1.11';
 const APP_PLATFORM = process.platform;
 
 function defaultDataDir() {

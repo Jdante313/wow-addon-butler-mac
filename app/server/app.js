@@ -592,6 +592,14 @@ async function handleApi(req, res, url) {
     return ok(res, await wow.listBackups());
   }
 
+  if (pathname === '/api/backups/prune' && method === 'POST') {
+    return ok(res, await wow.pruneBackups());
+  }
+
+  if (pathname === '/api/backups' && method === 'DELETE') {
+    return ok(res, await wow.clearBackups());
+  }
+
   if (pathname.match(/^\/api\/backups\/[^/]+\/restore$/) && method === 'POST') {
     const backupId = decodeURIComponent(pathname.split('/')[3]);
     const target = await wow.resolveAddonPath(settings);

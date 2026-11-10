@@ -1985,7 +1985,13 @@ function renderBackupPage() {
             <div class="section-intro">
               <div>
                 <h2>版本备份</h2>
-                <p>覆盖安装、更新和卸载前的旧版本。恢复前会先备份当前版本。</p>
+                <p>覆盖安装、更新和卸载前的旧版本。恢复前会先备份当前版本；默认只保留最近 ${
+                  state.bootstrap?.settings?.backupLimit || 8
+                } 份。</p>
+              </div>
+              <div class="section-intro-actions">
+                <button class="btn btn-sm" type="button" data-action="prune-backups">清理旧备份</button>
+                <button class="btn btn-sm btn-danger" type="button" data-action="clear-backups">清空版本备份</button>
               </div>
             </div>
             <div class="card"><div class="card-body tight">${backupHtml}</div></div>
@@ -2308,6 +2314,43 @@ async function importProfile() {
     toast(`已导入快照「${profile.name}」`);
     state.profilesLoaded = false;
     if (state.route === 'backup') await loadBackupPage(true);
+  } catch (error) {
+    toast(error.message, 'error');
+  }
+}
+
+async function pruneOldBackups() {
+  const limit = Math.max(1, Math.min(30, Number(state.bootstrap?.settings?.backupLimit) || 8));
+  const ok = await confirmDialog({
+    title: '清理旧备份',
+    message: `只保留最近 ${limit} 份版本备份，删除更早的备份。确定继续？`,
+    confirmText: '清理',
+    danger: false,
+  });
+  if (!ok) return;
+  try {
+    const result = await api('/api/backups/prune', { method: 'POST' });
+    toast(result.removed ? `已清理 ${result.removed} 份旧备份` : '没有需要清理的旧备份');
+    state.backupsLoaded = false;
+    await loadBackupPage(true);
+  } catch (error) {
+    toast(error.message, 'error');
+  }
+}
+
+async function clearAllBackups() {
+  const ok = await confirmDialog({
+    title: '清空版本备份',
+    message: '将删除所有版本备份，已恢复的插件不受影响。此操作不可撤销，确定继续？',
+    confirmText: '全部删除',
+    danger: true,
+  });
+  if (!ok) return;
+  try {
+    const result = await api('/api/backups', { method: 'DELETE' });
+    toast(result.removed ? `已清空 ${result.removed} 份版本备份` : '当前没有版本备份');
+    state.backupsLoaded = false;
+    await loadBackupPage(true);
   } catch (error) {
     toast(error.message, 'error');
   }
@@ -2985,6 +3028,12 @@ async function handleAction(action, element) {
       break;
     case 'restore-backup':
       await restoreBackup(element.dataset.id);
+      break;
+    case 'prune-backups':
+      await pruneOldBackups();
+      break;
+    case 'clear-backups':
+      await clearAllBackups();
       break;
     case 'client-choice':
     case 'candidate-choice':

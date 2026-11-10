@@ -860,9 +860,21 @@ async function pruneBackups() {
   const limit = Math.max(1, Number(settings.backupLimit) || 8);
   const entries = await fsp.readdir(BACKUP_DIR, { withFileTypes: true }).catch(() => []);
   const dirs = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort().reverse();
-  for (const stale of dirs.slice(limit)) {
+  const removed = dirs.slice(limit);
+  for (const stale of removed) {
     await fsp.rm(path.join(BACKUP_DIR, stale), { recursive: true, force: true }).catch(() => {});
   }
+  return { limit, removed: removed.length };
+}
+
+async function clearBackups() {
+  ensureDirs();
+  const entries = await fsp.readdir(BACKUP_DIR, { withFileTypes: true }).catch(() => []);
+  const dirs = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
+  for (const dir of dirs) {
+    await fsp.rm(path.join(BACKUP_DIR, dir), { recursive: true, force: true }).catch(() => {});
+  }
+  return { removed: dirs.length };
 }
 
 async function listBackups() {
@@ -1430,6 +1442,8 @@ module.exports = {
   uninstallAddon,
   createBackup,
   listBackups,
+  pruneBackups,
+  clearBackups,
   restoreBackup,
   directorySize,
   revealPath,
